@@ -16,7 +16,8 @@ class ProductController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        $products = $this->product::with('category')->get();
+        $products = $this->product::with('category')
+            ->paginate(9);
         return ProductResource::collection($products);
     }
 }
