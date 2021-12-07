@@ -24,5 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('categories', [ApiController::class, 'index'])->name('categories.index');
 Route::get('categories/{category}', [ApiController::class, 'show'])->name('category.show');
+Route::post('categories', [ApiController::class, 'store'])->name('category.store');
 
 Route::get('products', [ProductController::class, 'index'])->name('products.index');

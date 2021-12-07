@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use JetBrains\PhpStorm\Pure;
@@ -13,7 +12,7 @@ use JetBrains\PhpStorm\Pure;
 class ApiController extends Controller
 {
     public function __construct(
-        private Category $category,
+        private Category $category
     ){}
 
     public function index(): AnonymousResourceCollection
@@ -25,6 +24,14 @@ class ApiController extends Controller
     #[Pure]
     public function show(Category $category): CategoryResource
     {
+        return new CategoryResource($category);
+    }
+
+    public function store(Request $request): CategoryResource
+    {
+        $category = $this->category::query()
+            ->create($request->all());
+
         return new CategoryResource($category);
     }
 }
