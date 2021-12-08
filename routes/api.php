@@ -22,8 +22,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('categories', [ApiController::class, 'index'])->name('categories.index');
-Route::get('categories/{category}', [ApiController::class, 'show'])->name('category.show');
-Route::post('categories', [ApiController::class, 'store'])->name('category.store');
+/*Route::get('categories', [ApiController::class, 'index'])
+    ->name('categories.index');
+Route::get('categories/{category}', [ApiController::class, 'show'])
+    ->name('category.show');
+Route::post('categories', [ApiController::class, 'store'])
+    ->name('category.store');
+Route::put('categories/{category}', [ApiController::class, 'update'])
+    ->name('category.update');
+Route::delete('categories/{category}', [ApiController::class, 'destroy'])
+    ->name('category.destroy');*/
 
-Route::get('products', [ProductController::class, 'index'])->name('products.index');
+Route::apiResource('categories', ApiController::class);
+
+Route::get('products', [ProductController::class, 'index'])
+    ->name('products.index');
